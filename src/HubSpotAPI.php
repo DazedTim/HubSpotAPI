@@ -69,25 +69,25 @@ class HubSpotAPI {
 	
 		$fields = array(
 			'properties' => array(
-		        array(
-                    'property' => 'firstname',
-                    'value'    => $this->firstName
-                ),
-                array(
-                    'property' => 'lastname',
-                    'value'    => $this->lastName
-                ),
-                array(
-                    'property' => 'phone',
-                    'value'    => $this->phoneNumber
-                ),
-            ),
-        );
+				array(
+					'property' => 'firstname',
+					'value'    => $this->firstName
+				),
+				array(
+					'property' => 'lastname',
+					'value'    => $this->lastName
+				),
+				array(
+					'property' => 'phone',
+					'value'    => $this->phoneNumber
+				),
+			),
+		);
 
-        $response = Zttp::post($url, $fields);
+		$response = Zttp::post($url, $fields);
 
-        return $response->isOk();
-        
-    }
+		return $response->isOk();
+		
+	}
 }
 ?>
