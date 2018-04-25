@@ -8,7 +8,6 @@ class HubSpotAPI {
 
 	private $apiKey = false;
 	private $endpoint = 'https://api.hubapi.com/contacts/v1/contact/createOrUpdate/email';
-
 	public $firstName    = false;
 	public $lastName     = false;
 	public $emailAddress = false;
@@ -68,7 +67,7 @@ class HubSpotAPI {
 
 		$url = sprintf("%s/%s/?hapikey=%s", $this->endpoint, $this->emailAddress, $this->apiKey);
 	
-		$fields = array( // Liberty Dental has PHP 5 something... hence array()
+		$fields = array( 
             'properties' => array(
                 array(
                     'property' => 'firstname',
@@ -89,6 +88,6 @@ class HubSpotAPI {
 
         return $response->isOk();
         
-	}
+    }
 }
 ?>
