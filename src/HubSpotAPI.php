@@ -67,9 +67,9 @@ class HubSpotAPI {
 
 		$url = sprintf("%s/%s/?hapikey=%s", $this->endpoint, $this->emailAddress, $this->apiKey);
 	
-		$fields = array( 
-            'properties' => array(
-                array(
+		$fields = array(
+			'properties' => array(
+		        array(
                     'property' => 'firstname',
                     'value'    => $this->firstName
                 ),
