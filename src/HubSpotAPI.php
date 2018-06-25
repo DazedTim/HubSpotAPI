@@ -103,7 +103,7 @@ class HubSpotAPI {
 		curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
 		curl_exec($handler);
 		$statusCode = curl_getinfo($handler, CURLINFO_HTTP_CODE);
-		curl_close($ch);
+		curl_close($handler);
 
 
 		if ($statusCode !== 200) {
