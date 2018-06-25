@@ -1,8 +1,5 @@
 {
     "name": "timord/hubspotapi",
-    "require": {
-		"kitetail/zttp": "^0.3.0"
-    },
     "autoload": {
         "psr-4": {
             "TimOrd\\HubSpotAPI\\": "src/"

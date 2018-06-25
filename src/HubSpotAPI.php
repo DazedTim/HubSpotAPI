@@ -2,8 +2,6 @@
 
 namespace TimOrd\HubSpotAPI;
 
-use Zttp\Zttp;
-
 class HubSpotAPI {
 
 	private $apiKey = false;
@@ -16,18 +14,18 @@ class HubSpotAPI {
 
 	public function setApiKey($apiKey)
 	{
-		
+
 		$this->apiKey = $apiKey;
-		
+
 		return $this;
-		
+
 	}
 
 	public function setEmailAddress($emailAddress)
 	{
 
 		$this->emailAddress = $emailAddress;
-	
+
 		return $this;
 
 	}
@@ -36,7 +34,7 @@ class HubSpotAPI {
 	{
 
 		$this->setField('firstname', $firstName);
-	
+
 		return $this;
 
 	}
@@ -45,7 +43,7 @@ class HubSpotAPI {
 	{
 
 		$this->setField('lastname', $lastName);
-	
+
 		return $this;
 
 	}
@@ -54,7 +52,7 @@ class HubSpotAPI {
 	public function setPhoneNumber($phoneNumber)
 	{
 		$this->setField('phone', $phoneNumber);
-	
+
 		return $this;
 
 	}
@@ -63,7 +61,7 @@ class HubSpotAPI {
 	{
 
 		$this->fields[$key] = $value;
-		
+
 		return $this;
 	}
 
@@ -73,7 +71,7 @@ class HubSpotAPI {
 		foreach ($fields as $key => $value ){
 			$this->setField($key, $value);
 		}
-		
+
 		return $this;
 	}
 
@@ -95,10 +93,23 @@ class HubSpotAPI {
 			);
 		}
 
-		$response = Zttp::post($url, $fields);
+		$body = json_encode($fields);
 
-		return $response->isOk();
-		
+		$handler = curl_init();
+		curl_setopt($handler, CURLOPT_POST, true);
+		curl_setopt($handler, CURLOPT_POSTFIELDS, $body);
+		curl_setopt($handler, CURLOPT_URL, $url);
+		curl_setopt($handler, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
+		curl_exec($handler);
+		$statusCode = curl_getinfo($handler, CURLINFO_HTTP_CODE);
+		curl_close($handler);
+
+
+		if ($statusCode !== 200) {
+			new Exception(curl_error($handler));
+		}
+
+		return true;
 	}
 }
-?>
